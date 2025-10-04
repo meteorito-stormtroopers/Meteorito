@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Meteorito - Meteor Scanning App </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <style>
+        /* Base FAQ styling */
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .faq-question {
+            background-color: #ffffff;
+            color: #007bff;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: block;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+        .faq-answer {
+            padding: 0 20px;
+            background-color: #f8f9fa;
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+        }
+        .faq-answer p {
+            padding: 15px 0;
+            margin: 0;
+            color: #495057;
+            border-top: 1px solid #e9ecef;
+        }
+        /* Active state for question and answer */
+        .faq-item.active .faq-answer {
+            max-height: 500px; /* Expandable height */
+            padding: 0 20px 15px 20px;
+        }
+        .faq-item.active .faq-question {
+            background-color: #e9f5ff;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <button class="menu-button" id="menuBtn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <div class="nav-options" id="navOptions">
+            <button class="nav-link" data-page="about-page"> About </button>
+            <button class="nav-link" data-page="scan-page"> Scan Meteors </button>
+            <button class="nav-link" data-page="help-page"> Help </button>
+        </div>
+    </nav>
+
+    <div class="pages-container">
+
+<div id="home-page" class="page active">
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Meteorito App Logo - Modern meteor design with space theme and glowing effects" class="logo">
+            <p class="tagline"> Capture the cosmos, one meteor at a time! </p>
+        </div>
+    </div>
+
+<div id="scan-page" class="page">
+        <div class="scan-container">
+            <h1 class="scan-title"> SCAN METEORS THROUGH YOUR CAMERA </h1>
+
+                <div class="camera-section">
+                    <button class="camera-button" id="camera-button">
+                        <div class="camera-icon">
+                            <div class="camera-lens"></div>
+                        </div>
+                        <span> Capture Meteor </span>
+                    </button>
+                </div>
+
+                <div class="instructions">
+                    <h3>How to scan meteors:</h3>
+                    <ol>
+                        <li> Allow camera access when prompted </li>
+                        <li> Point your device toward the night sky </li>
+                        <li> Tap the camera button when you see a meteor </li>
+                        <li> Hold steady for clear detection </li>
+                        <li> Our AI will analyze and identify the meteor </li>
+                    </ol>
+                </div>
+
+                <iframe src="https://data.nasa.gov/dataset/near-earth-comets-orbital-elements-api" width="600" height="400" title="Comets near Earth"></iframe>
+        </div>
+    </div>
+
+<div id="about-page" class="page">
+        <div class="about-container">
+            <h1>About Meteorito</h1>
+            <div class="placeholder-content">
+            <p>Hey there! Welcome to Meteorito. <br>
+
+The idea for this app started simple: We love space, but we noticed a huge problem. NASA and the big agencies track the giant asteroids—the ones that could end the world—but what about the meteors and comets closest to Earth that nobody talks about? The ones big enough to cause damage, but too small to be noticed until they're literally lighting up the sky.
+The four of us—Shambhavi Raut, Aryan Gupta, Ahaan Sarda, and Kavya Mittal—decided we weren't going to wait for someone else to solve this. We took the tech and programming skills we had, combined them with our obsession with space science, and built this software.
+We hope you enjoy using it as much as we enjoyed the chaos of making it.<br>
+<br> - Team Meteorito <br>
+<br> What We're Building <br>
+<br>Meteorito is an app that turns your phone into a mini, personal observatory.
+The app’s design is focused entirely on data quality and community participation<br>
+<br> Why This Matters <br>
+<br>For us, this isn't just a project—it’s about making space science accessible and useful to everyone.
+We’re proud to be a part of the NASA Space Apps Challenge, and we're committed to keeping Meteorito free,
+fast, and simple to use.<br>
+<br>Thank you for being part of our team.<br></p>
+            </div>
+        </div>
+    </div>
+
+<div id="help-page" class="page">
+        <div class="help-container">
+            <h1>Help & Support</h1>
+                <p>
+                Contact Information:
+<br>
+                For all technical support and account-related questions, please email us directly:
+
+                meteorito.stormtoopers@gmail.com
+<br>
+                Please include the following information in your email to help us resolve your issue quickly:
+<br>
+                Subject Line: A brief description of the issue (e.g., "Camera Not Working," "Login Issue").
+                Device Type: (e.g., iPhone 15, Samsung Galaxy S23, Google Pixel 8).
+                Operating System Version: (e.g., iOS 17.1, Android 14).
+                Meteorito App Version: (Found in the app's Settings or Info menu).
+                Detailed Description: Step-by-step actions you took that led to the issue, and any troubleshooting steps you've already tried.
+                </p>
+            </div>
+
+            <h2 style="margin-top: 40px;">2. Frequently Asked Questions (FAQs) - General</h2>
+            <div id="faq-container">
+                <p>Loading FAQs...</p>
+            </div>
+
+            <p style="margin-top: 20px;">*The Export to Sheets note has been removed as this is a static webpage. If you wish to include it, you can add it back manually.*</p>
+
+        </div>
+    </div>
+
+  <script>
+    // --- START OF JAVASCRIPT LOGIC ---
+
+   // DOM Elements
+const menuBtn = document.getElementById('menuBtn');
+const navOptions = document.getElementById('navOptions');
+const navLinks = document.querySelectorAll('.nav-link');
+const pages = document.querySelectorAll('.page');
+const cameraButton = document.getElementById('camera-button');
+// Toggle menu visibility
+menuBtn.addEventListener('click', () => {
+    navOptions.classList.toggle('show');
+});
+// Navigation functionality
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetPage = link.getAttribute('data-page');
+        
+        // Hide all pages
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Show target page
+        document.getElementById(targetPage).classList.add('active');
+        
+        // Close menu after selection
+        navOptions.classList.remove('show');
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    });
+});
+// Camera functionality
+cameraButton.addEventListener('click', () => {
+    // Check if browser supports media devices
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        alert('Your browser does not support camera access. Please use a modern browser like Chrome, Firefox, or Safari.');
+        return;
+    }
+      // Request camera permission
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then((stream) => {
+            // Camera access granted
+            alert('Camera access granted! Ready to scan meteors.');
+            // Here you would typically set up the camera stream and capture functionality
+            // For this demo, we'll just show a success message
+        })
+        .catch((error) => {
+            // Camera access denied or error
+            alert('Unable to access camera. Please check your permissions and try again.');
+            console.error('Camera access error:', error);
+        });
+});
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (navOptions.classList.contains('show') && 
+        !menuBtn.contains(e.target) && 
+        !navOptions.contains(e.target)) {
+        navOptions.classList.remove('show');
+    }
+});
+// Add smooth scrolling for better UX
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+// Handle page load - ensure home page is active
+document.addEventListener('DOMContentLoaded', () => {
+    // Hide all pages first
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+    
+    // Show home page
+    document.getElementById('home-page').classList.add('active');
+});
+    // 2. EMBEDDED CSV DATA (This is your 'meteorito-faq.csv' content)
+    const embeddedCSV =
+        `Question,Answer
+"What kind of meteors can Meteorito scan?","Meteorito is designed to use your device's camera to analyze various characteristics of suspected space rocks or track specific known meteor showers and fireballs in the sky. For ground scans, it works best with clear, high-resolution images."
+"Do I need an internet connection to scan?","You need an internet connection (Wi-Fi or cellular data) to submit your scan for analysis and receive detailed results. However, you can often capture the initial image or video offline, and the app will queue the submission until you regain connectivity."
+"Is Meteorito free?","Meteorito offers a free version with core scanning features and a premium subscription for advanced analysis tools, larger storage, and ad-free use. Check the App Store or Google Play Store for current pricing."
+"My device is heating up while scanning. Is this normal?","Using the camera, processor, and display simultaneously for extended periods, especially in full-screen scanning mode, requires significant resources and can cause the device to warm up. This is generally normal. If your device becomes excessively hot or displays a temperature warning, stop using the app and allow your device to cool down."
+"How accurate is the meteor identification?","Meteorito uses advanced machine learning and image analysis to provide a high probability of identification, but results should always be treated as a preliminary analysis. We encourage consulting with a professional geologist or astronomer for definitive confirmation."`;
+
+
+    // 3. PAPA PARSE & FAQ GENERATION LOGIC
+    function loadAndParseCSV() {
+        Papa.parse(embeddedCSV, {
+            header: true,         // Uses the first row as column headers
+            dynamicTyping: true, 
+
+            complete: function(results) {
+                let data = results.data;
+
+                // Cleanup: Remove the potential last empty object if CSV has a trailing newline
+                if (data.length > 0 && Object.keys(data[data.length - 1]).length === 0) {
+                    data.pop();
+                }
+
+                buildFAQ(data);
+            }
+        });
+    }
+
+    function buildFAQ(data) {
+        const container = document.getElementById('faq-container');
+        container.innerHTML = ''; // Clear the "Loading" message
+
+        if (!data || data.length === 0) {
+            container.innerHTML = '<p>No FAQ items found.</p>';
+            return;
+        }
+
+        data.forEach((item) => {
+            // Create main item container
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+
+            // Create Question element (the clickable header)
+            const questionButton = document.createElement('div');
+            questionButton.className = 'faq-question';
+            questionButton.textContent = item.Question;
+            questionButton.setAttribute('role', 'button');
+            questionButton.setAttribute('tabindex', 0);
+
+            // Create Answer element (the collapsible body)
+            const answerDiv = document.createElement('div');
+            answerDiv.className = 'faq-answer';
+            const answerP = document.createElement('p');
+            answerP.textContent = item.Answer;
+            answerDiv.appendChild(answerP);
+
+            // Append parts
+            faqItem.appendChild(questionButton);
+            faqItem.appendChild(answerDiv);
+            container.appendChild(faqItem);
+
+            // Add click listener for toggling the accordion
+            questionButton.addEventListener('click', function() {
+                // Check if the item is already active
+                const isActive = faqItem.classList.contains('active');
+
+                // Optional: Close all other open items first (accordion-style)
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+
+                // Toggle the current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    }
+
+    // Run the FAQ generation when the script loads
+    loadAndParseCSV();
+
+    // --- END OF JAVASCRIPT LOGIC ---
+  </script>
+</body>
+</html>
